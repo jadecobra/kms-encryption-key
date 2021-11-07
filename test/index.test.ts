@@ -9,7 +9,13 @@ const administratorRoleArns = () => {
 };
 test('Encryption Key contains KMS Key', () => {
   const app = new App();
-  const stack = new Stack(app, 'TestEncryptionKey');
+  const stack = new Stack(app, 'TestEncryptionKey', {
+    env: {
+      account: '123456789012',
+      region: 'us-east-1',
+    },
+  });
+
   new KmsEncryptionKey(stack, 'EncryptionKey', {
     keyName: 'TestKey',
     environmentName: 'TEST',
@@ -55,11 +61,7 @@ test('Encryption Key contains KMS Key', () => {
                     {
                       Ref: 'AWS::Partition',
                     },
-                    ':iam::',
-                    {
-                      Ref: 'AWS::AccountId',
-                    },
-                    ':root',
+                    ':iam::123456789012:root',
                   ],
                 ],
               },
