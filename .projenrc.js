@@ -4,7 +4,7 @@ const projectName = () => {
   return 'kms-encryption-key';
 };
 const moduleName = () => {
-  return projectName().replaceAll('-', '_');
+  return projectName().replace(/-/gi, '_');
 };
 
 const project = new AwsCdkConstructLibrary({
