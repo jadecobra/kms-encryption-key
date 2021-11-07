@@ -119,7 +119,7 @@
     "targets": {
       "python": {
         "distName": "kms-encryption-key",
-        "module": "kms_encryption-key"
+        "module": "jadecobra.kms_encryption_key"
       }
     },
     "tsc": {
