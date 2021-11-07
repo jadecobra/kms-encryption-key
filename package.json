@@ -1,5 +1,5 @@
 {
-  "name": "jadecobra.kms-encryption-key",
+  "name": "kms-encryption-key",
   "description": "CDK Construct to create KMS Key for Encryption and defined Administrators in a Key Policy",
   "repository": {
     "type": "git",
@@ -17,7 +17,6 @@
     "package": "npx projen package",
     "publish:github": "npx projen publish:github",
     "publish:npm": "npx projen publish:npm",
-    "publish:nuget": "npx projen publish:nuget",
     "publish:pypi": "npx projen publish:pypi",
     "release": "npx projen release",
     "test": "npx projen test",
@@ -119,11 +118,8 @@
     "outdir": "dist",
     "targets": {
       "python": {
-        "distName": "jadecobra.kms-encryption-key",
-        "module": "jadecobra.kms_encryption-key"
-      },
-      "dotnet": {
-        "packageId": "Jadecobra.KmsEncryptionKey"
+        "distName": "kms-encryption-key",
+        "module": "kms_encryption-key"
       }
     },
     "tsc": {

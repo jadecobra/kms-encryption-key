@@ -1,8 +1,7 @@
 const { AwsCdkConstructLibrary } = require('projen');
 const { DependabotScheduleInterval } = require('projen/lib/github');
 const projectName = () => {
-  // return 'kms-encryption-key';
-  return 'jadecobra.kms-encryption-key';
+  return 'kms-encryption-key';
 };
 const project = new AwsCdkConstructLibrary({
   author: 'jakeitegsy',
@@ -32,10 +31,10 @@ const project = new AwsCdkConstructLibrary({
     distName: projectName(),
     module: projectName().replace('-', '_'),
   },
-  publishToNuget: {
-    dotNamespace: 'JadeCobra.KmsEncryptionKey',
-    packageId: 'Jadecobra.KmsEncryptionKey',
-  },
+  // publishToNuget: {
+  //   dotNamespace: 'JadeCobra.KmsEncryptionKey',
+  //   packageId: 'Kms.Encryption.Key',
+  // },
   catalog: {
     announce: true,
     twitter: '@jakeitegsy',
