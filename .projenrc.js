@@ -12,6 +12,7 @@ const project = new AwsCdkConstructLibrary({
   repositoryUrl: 'https://github.com/jakeitegsy/kms-encryption-key.git',
   cdkAssert: true,
   cdkDependencies: ['@aws-cdk/core', '@aws-cdk/aws-kms', '@aws-cdk/aws-iam'],
+  cdkVersionPinning: false,
   docgen: true,
   license: 'Apache-2.0',
   npmAccess: 'public',
@@ -25,6 +26,7 @@ const project = new AwsCdkConstructLibrary({
   },
   defaultReleaseCommitMessage: 'Release {{version}}',
   releaseToNpm: true,
+  releaseToGitHub: true,
   publishToPypi: {
     distName: projectName(),
     module: projectName().replace('-', '_'),
@@ -32,6 +34,10 @@ const project = new AwsCdkConstructLibrary({
   publishToNuget: {
     dotNamespace: 'jadecobra.KmsEncryptionKey',
     packageId: 'jadecobra.KmsEncryptionKey',
+  },
+  catalog: {
+    announce: true,
+    twitter: '@jakeitegsy',
   },
   description:
     'CDK Construct to create KMS Key for Encryption and defined Administrators in a Key Policy' /* The description is just a string that helps people understand the purpose of the package. */,
