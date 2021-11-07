@@ -4,23 +4,48 @@ import { KmsEncryptionKey } from '../src';
 
 const administratorRoleArns = () => {
   return ['a', 'b', 'c', 'd'].map(
-    (name) => `arn:aws:iam::123456789012:role/${name}`
+    (name) => `arn:aws:iam::123456789012:role/${name}`,
   );
 };
-test('Encryption Key contains KMS Key', () => {
-  const app = new App();
-  const stack = new Stack(app, 'TestEncryptionKey', {
-    env: {
-      account: '123456789012',
-      region: 'us-east-1',
-    },
-  });
+const keyName = () => {
+  return 'test-key';
+};
 
-  new KmsEncryptionKey(stack, 'EncryptionKey', {
-    keyName: 'TestKey',
-    environmentName: 'TEST',
-    administratorRoleArns: administratorRoleArns(),
-  });
+const environmentName = () => {
+  return 'test';
+};
+
+const description = () => {
+  return `${environmentName()}-kms-encryption-key`;
+};
+
+const app = new App();
+const stack = new Stack(app, 'TestEncryptionKey', {
+  env: {
+    account: '123456789012',
+    region: 'us-east-1',
+  },
+});
+
+const testEncryptionKey = new KmsEncryptionKey(stack, keyName(), {
+  keyName: keyName(),
+  environmentName: environmentName(),
+  administratorRoleArns: administratorRoleArns(),
+});
+
+test('Encryption Key Name', () => {
+  expect(testEncryptionKey.keyName).toBe(keyName());
+});
+
+test('Encryption Key Environment Name', () => {
+  expect(testEncryptionKey.environmentName).toBe(environmentName());
+});
+
+test('Encryption Key default description when none given', () => {
+  expect(testEncryptionKey.description).toBe(description());
+});
+
+test('Encryption Key contains KMS Key', () => {
   expectCDK(stack).to(
     haveResource('AWS::KMS::Key', {
       KeyPolicy: {
@@ -71,17 +96,17 @@ test('Encryption Key contains KMS Key', () => {
         ],
         Version: '2012-10-17',
       },
-      Description: 'TEST-kms-encryption-key',
+      Description: description(),
       Tags: [
         {
-          Key: 'environment',
-          Value: 'TEST',
+          Key: 'alias',
+          Value: keyName(),
         },
         {
-          Key: 'name',
-          Value: 'TestKey',
+          Key: 'environment',
+          Value: environmentName(),
         },
       ],
-    })
+    }),
   );
 });

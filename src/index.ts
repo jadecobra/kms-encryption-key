@@ -1,1 +1,1 @@
-export * from './kmsEncryptionKey';
+export * from './jadecobra.kmsEncryptionKey';
