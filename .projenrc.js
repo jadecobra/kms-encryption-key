@@ -1,16 +1,42 @@
 const { AwsCdkConstructLibrary } = require('projen');
+const { DependabotScheduleInterval } = require('projen/lib/github');
+const projectName = () => {
+  return 'jadecobra.kms-encryption-key';
+};
 const project = new AwsCdkConstructLibrary({
   author: 'jakeitegsy',
   authorAddress: 'jakeitegsy@yahoo.com',
   cdkVersion: '1.95.2',
   defaultReleaseBranch: 'main',
-  name: 'kms-encryption-key',
+  name: projectName(),
   repositoryUrl: 'https://github.com/jakeitegsy/kms-encryption-key.git',
-
-  // cdkDependencies: undefined,      /* Which AWS CDK modules (those that start with "@aws-cdk/") does this library require when consumed? */
+  cdkAssert: true,
+  cdkDependencies: ['@aws-cdk/core', '@aws-cdk/aws-kms', '@aws-cdk/aws-iam'],
+  docgen: true,
+  license: 'Apache-2.0',
+  npmAccess: 'public',
+  eslint: true,
+  antitamper: true,
+  dependabot: true,
+  dependabotOptions: {
+    autoMerge: true,
+    ignoreProjen: true,
+    scheduleInterval: DependabotScheduleInterval.WEEKLY,
+  },
+  defaultReleaseCommitMessage: 'Release {{version}}',
+  releaseToNpm: true,
+  publishToPypi: {
+    distName: projectName(),
+    module: projectName().replace('-', '_'),
+  },
+  publishToNuget: {
+    dotNamespace: 'jadecobra.KmsEncryptionKey',
+    packageId: 'jadecobra.KmsEncryptionKey',
+  },
+  description:
+    'CDK Construct to create KMS Key for Encryption and defined Administrators in a Key Policy' /* The description is just a string that helps people understand the purpose of the package. */,
   // cdkTestDependencies: undefined,  /* AWS CDK modules required for testing. */
   // deps: [],                        /* Runtime dependencies of this module. */
-  // description: undefined,          /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],                     /* Build dependencies for this module. */
   // packageName: undefined,          /* The "name" in package.json. */
   // release: undefined,              /* Add release management to this project. */
