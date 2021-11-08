@@ -32,24 +32,6 @@ new KmsEncryptionKey(scope: Construct, id: string, props?: KmsEncryptionKeyProps
 
 #### Methods <a name="Methods"></a>
 
-##### `addTags` <a name="kms-encryption-key.KmsEncryptionKey.addTags"></a>
-
-```typescript
-public addTags()
-```
-
-##### `createKmsKey` <a name="kms-encryption-key.KmsEncryptionKey.createKmsKey"></a>
-
-```typescript
-public createKmsKey(kmsAdministratorArns: string[])
-```
-
-###### `kmsAdministratorArns`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.parameter.kmsAdministratorArns"></a>
-
-- *Type:* `string`[]
-
----
-
 ##### `getKeyName` <a name="kms-encryption-key.KmsEncryptionKey.getKeyName"></a>
 
 ```typescript
