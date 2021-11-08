@@ -13,7 +13,7 @@ const project = new AwsCdkConstructLibrary({
   cdkVersion: '1.95.2',
   defaultReleaseBranch: 'main',
   name: projectName(),
-  repositoryUrl: 'https://github.com/jakeitegsy/kms-encryption-key.git',
+  repositoryUrl: 'https://github.com/jadecobra/kms-encryption-key.git',
   cdkAssert: true,
   cdkDependencies: ['@aws-cdk/core', '@aws-cdk/aws-kms', '@aws-cdk/aws-iam'],
   cdkVersionPinning: false,
