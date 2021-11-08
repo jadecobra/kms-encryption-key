@@ -48,7 +48,11 @@ export class KmsEncryptionKey extends Construct {
   public readonly keyName: string;
   public readonly environmentName?: string;
 
-  constructor(scope: Construct, id: string, props?: KmsEncryptionKeyProps) {
+  constructor(
+    scope: Construct,
+    id: string,
+    props: KmsEncryptionKeyProps = {},
+  ) {
     super(scope, id);
     this.environmentName = props?.environmentName ?? 'DEV';
     this.description = this.getKeyName(props?.description);
