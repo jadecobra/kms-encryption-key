@@ -2,9 +2,9 @@ import { haveResource, expect as expectCDK } from '@aws-cdk/assert';
 import { App, Stack } from '@aws-cdk/core';
 import { KmsEncryptionKey } from '../src';
 
-const administratorRoleArns = () => {
+const kmsAdministratorArns = () => {
   return ['a', 'b', 'c', 'd'].map(
-    (name) => `arn:aws:iam::123456789012:role/${name}`,
+    (name) => `arn:aws:iam::123456789012:role/${name}`
   );
 };
 const keyName = () => {
@@ -30,7 +30,7 @@ const stack = new Stack(app, 'TestEncryptionKey', {
 const testEncryptionKey = new KmsEncryptionKey(stack, keyName(), {
   keyName: keyName(),
   environmentName: environmentName(),
-  administratorRoleArns: administratorRoleArns(),
+  kmsAdministratorArns: kmsAdministratorArns(),
 });
 
 test('Encryption Key Name', () => {
@@ -54,7 +54,7 @@ test('Encryption Key contains KMS Key', () => {
             Action: 'kms:*',
             Effect: 'Allow',
             Principal: {
-              AWS: administratorRoleArns(),
+              AWS: kmsAdministratorArns(),
             },
             Resource: '*',
           },
@@ -107,6 +107,6 @@ test('Encryption Key contains KMS Key', () => {
           Value: environmentName(),
         },
       ],
-    }),
+    })
   );
 });

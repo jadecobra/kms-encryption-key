@@ -6,7 +6,7 @@ test('KmsEncryptionKey creates KMS Encryption Key with administratorRoleArns', (
   const stack = new Stack();
   new KmsEncryptionKey(stack, 'Key', {
     description: 'Test Key',
-    administratorRoleArns: ['arn:aws:iam::123456789012:role/Administrator'],
+    kmsAdministratorArns: ['arn:aws:iam::123456789012:role/Administrator'],
     keyName: 'test-key',
   });
 
