@@ -4,30 +4,27 @@ import {
   PolicyDocument,
   PolicyStatement,
 } from '@aws-cdk/aws-iam';
-import { Key, IKey } from '@aws-cdk/aws-kms';
+import { Key } from '@aws-cdk/aws-kms';
 import { Construct, RemovalPolicy, Tags } from '@aws-cdk/core';
 
-export interface IKmsEncryptionKeyProps {
-  readonly keyName: string;
+export interface KmsEncryptionKeyProps {
+  readonly keyName?: string;
   readonly kmsAdministratorArns?: string[];
   readonly environmentName?: string;
   readonly description?: string;
 }
 
-export class KmsEncryptionKey
-  extends Construct
-  implements IKmsEncryptionKeyProps
-{
+export class KmsEncryptionKey extends Construct {
   static getArnPrincipals(kmsAdministratorArns: string[]): ArnPrincipal[] {
     return kmsAdministratorArns.map((arn) => new ArnPrincipal(arn));
   }
 
   static getAdministratorArns(
-    kmsAdministratorArns: string[]
+    kmsAdministratorArns: string[],
   ): CompositePrincipal[] {
     return [
       new CompositePrincipal(
-        ...KmsEncryptionKey.getArnPrincipals(kmsAdministratorArns)
+        ...KmsEncryptionKey.getArnPrincipals(kmsAdministratorArns),
       ),
     ];
   }
@@ -39,19 +36,19 @@ export class KmsEncryptionKey
           actions: ['kms:*'],
           resources: ['*'],
           principals: KmsEncryptionKey.getAdministratorArns(
-            kmsAdministratorArns
+            kmsAdministratorArns,
           ),
         }),
       ],
     });
   }
 
-  readonly kmsKey: IKey;
-  readonly description?: string;
-  readonly keyName: string;
-  readonly environmentName?: string;
+  public readonly kmsKey: Key;
+  public readonly description?: string;
+  public readonly keyName: string;
+  public readonly environmentName?: string;
 
-  constructor(scope: Construct, id: string, props?: IKmsEncryptionKeyProps) {
+  constructor(scope: Construct, id: string, props?: KmsEncryptionKeyProps) {
     super(scope, id);
     this.environmentName = props?.environmentName ?? 'DEV';
     this.description = this.getKeyName(props?.description);

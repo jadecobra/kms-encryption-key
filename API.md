@@ -4,14 +4,12 @@
 
 ### KmsEncryptionKey <a name="kms-encryption-key.KmsEncryptionKey"></a>
 
-- *Implements:* [`kms-encryption-key.IKmsEncryptionKeyProps`](#kms-encryption-key.IKmsEncryptionKeyProps)
-
 #### Initializers <a name="kms-encryption-key.KmsEncryptionKey.Initializer"></a>
 
 ```typescript
 import { KmsEncryptionKey } from 'kms-encryption-key'
 
-new KmsEncryptionKey(scope: Construct, id: string, props?: IKmsEncryptionKeyProps)
+new KmsEncryptionKey(scope: Construct, id: string, props?: KmsEncryptionKeyProps)
 ```
 
 ##### `scope`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.parameter.scope"></a>
@@ -28,7 +26,7 @@ new KmsEncryptionKey(scope: Construct, id: string, props?: IKmsEncryptionKeyProp
 
 ##### `props`<sup>Optional</sup> <a name="kms-encryption-key.KmsEncryptionKey.parameter.props"></a>
 
-- *Type:* [`kms-encryption-key.IKmsEncryptionKeyProps`](#kms-encryption-key.IKmsEncryptionKeyProps)
+- *Type:* [`kms-encryption-key.KmsEncryptionKeyProps`](#kms-encryption-key.KmsEncryptionKeyProps)
 
 ---
 
@@ -43,10 +41,10 @@ public addTags()
 ##### `createKmsKey` <a name="kms-encryption-key.KmsEncryptionKey.createKmsKey"></a>
 
 ```typescript
-public createKmsKey(administratorRoleArns: string[])
+public createKmsKey(kmsAdministratorArns: string[])
 ```
 
-###### `administratorRoleArns`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.parameter.administratorRoleArns"></a>
+###### `kmsAdministratorArns`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.parameter.kmsAdministratorArns"></a>
 
 - *Type:* `string`[]
 
@@ -71,10 +69,10 @@ public getKeyName(keyName?: string)
 ```typescript
 import { KmsEncryptionKey } from 'kms-encryption-key'
 
-KmsEncryptionKey.createKeyPolicy(administratorRoleArns: string[])
+KmsEncryptionKey.createKeyPolicy(kmsAdministratorArns: string[])
 ```
 
-###### `administratorRoleArns`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.parameter.administratorRoleArns"></a>
+###### `kmsAdministratorArns`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.parameter.kmsAdministratorArns"></a>
 
 - *Type:* `string`[]
 
@@ -85,10 +83,10 @@ KmsEncryptionKey.createKeyPolicy(administratorRoleArns: string[])
 ```typescript
 import { KmsEncryptionKey } from 'kms-encryption-key'
 
-KmsEncryptionKey.getAdministratorArns(administratorRoleArns: string[])
+KmsEncryptionKey.getAdministratorArns(kmsAdministratorArns: string[])
 ```
 
-###### `administratorRoleArns`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.parameter.administratorRoleArns"></a>
+###### `kmsAdministratorArns`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.parameter.kmsAdministratorArns"></a>
 
 - *Type:* `string`[]
 
@@ -99,10 +97,10 @@ KmsEncryptionKey.getAdministratorArns(administratorRoleArns: string[])
 ```typescript
 import { KmsEncryptionKey } from 'kms-encryption-key'
 
-KmsEncryptionKey.getArnPrincipals(administratorRoleArns: string[])
+KmsEncryptionKey.getArnPrincipals(kmsAdministratorArns: string[])
 ```
 
-###### `administratorRoleArns`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.parameter.administratorRoleArns"></a>
+###### `kmsAdministratorArns`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.parameter.kmsAdministratorArns"></a>
 
 - *Type:* `string`[]
 
@@ -123,10 +121,10 @@ public readonly keyName: string;
 ##### `kmsKey`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.property.kmsKey"></a>
 
 ```typescript
-public readonly kmsKey: IKey;
+public readonly kmsKey: Key;
 ```
 
-- *Type:* [`@aws-cdk/aws-kms.IKey`](#@aws-cdk/aws-kms.IKey)
+- *Type:* [`@aws-cdk/aws-kms.Key`](#@aws-cdk/aws-kms.Key)
 
 ---
 
@@ -151,38 +149,19 @@ public readonly environmentName: string;
 ---
 
 
+## Structs <a name="Structs"></a>
 
+### KmsEncryptionKeyProps <a name="kms-encryption-key.KmsEncryptionKeyProps"></a>
 
-## Protocols <a name="Protocols"></a>
-
-### IKmsEncryptionKeyProps <a name="kms-encryption-key.IKmsEncryptionKeyProps"></a>
-
-- *Implemented By:* [`kms-encryption-key.KmsEncryptionKey`](#kms-encryption-key.KmsEncryptionKey), [`kms-encryption-key.IKmsEncryptionKeyProps`](#kms-encryption-key.IKmsEncryptionKeyProps)
-
-
-#### Properties <a name="Properties"></a>
-
-##### `keyName`<sup>Required</sup> <a name="kms-encryption-key.IKmsEncryptionKeyProps.property.keyName"></a>
+#### Initializer <a name="[object Object].Initializer"></a>
 
 ```typescript
-public readonly keyName: string;
+import { KmsEncryptionKeyProps } from 'kms-encryption-key'
+
+const kmsEncryptionKeyProps: KmsEncryptionKeyProps = { ... }
 ```
 
-- *Type:* `string`
-
----
-
-##### `administratorRoleArns`<sup>Optional</sup> <a name="kms-encryption-key.IKmsEncryptionKeyProps.property.administratorRoleArns"></a>
-
-```typescript
-public readonly administratorRoleArns: string[];
-```
-
-- *Type:* `string`[]
-
----
-
-##### `description`<sup>Optional</sup> <a name="kms-encryption-key.IKmsEncryptionKeyProps.property.description"></a>
+##### `description`<sup>Optional</sup> <a name="kms-encryption-key.KmsEncryptionKeyProps.property.description"></a>
 
 ```typescript
 public readonly description: string;
@@ -192,7 +171,7 @@ public readonly description: string;
 
 ---
 
-##### `environmentName`<sup>Optional</sup> <a name="kms-encryption-key.IKmsEncryptionKeyProps.property.environmentName"></a>
+##### `environmentName`<sup>Optional</sup> <a name="kms-encryption-key.KmsEncryptionKeyProps.property.environmentName"></a>
 
 ```typescript
 public readonly environmentName: string;
@@ -201,4 +180,26 @@ public readonly environmentName: string;
 - *Type:* `string`
 
 ---
+
+##### `keyName`<sup>Optional</sup> <a name="kms-encryption-key.KmsEncryptionKeyProps.property.keyName"></a>
+
+```typescript
+public readonly keyName: string;
+```
+
+- *Type:* `string`
+
+---
+
+##### `kmsAdministratorArns`<sup>Optional</sup> <a name="kms-encryption-key.KmsEncryptionKeyProps.property.kmsAdministratorArns"></a>
+
+```typescript
+public readonly kmsAdministratorArns: string[];
+```
+
+- *Type:* `string`[]
+
+---
+
+
 

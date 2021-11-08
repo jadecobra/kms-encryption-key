@@ -4,7 +4,7 @@ import { KmsEncryptionKey } from '../src';
 
 const kmsAdministratorArns = () => {
   return ['a', 'b', 'c', 'd'].map(
-    (name) => `arn:aws:iam::123456789012:role/${name}`
+    (name) => `arn:aws:iam::123456789012:role/${name}`,
   );
 };
 const keyName = () => {
@@ -107,6 +107,6 @@ test('Encryption Key contains KMS Key', () => {
           Value: environmentName(),
         },
       ],
-    })
+    }),
   );
 });
