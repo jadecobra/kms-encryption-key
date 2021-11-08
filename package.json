@@ -1,9 +1,9 @@
 {
   "name": "kms-encryption-key",
-  "description": "CDK Construct to create KMS Key for Encryption and defined Administrators in a Key Policy",
+  "description": "CDK Construct to create KMS Key with defined Administrator Role Arns",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jakeitegsy/kms-encryption-key.git"
+    "url": "https://github.com/jadecobra/kms-encryption-key.git"
   },
   "scripts": {
     "build": "npx projen build",

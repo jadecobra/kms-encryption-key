@@ -4,6 +4,8 @@
 
 ### KmsEncryptionKey <a name="kms-encryption-key.KmsEncryptionKey"></a>
 
+- *Implements:* [`kms-encryption-key.IKmsEncryptionKeyProps`](#kms-encryption-key.IKmsEncryptionKeyProps)
+
 #### Initializers <a name="kms-encryption-key.KmsEncryptionKey.Initializer"></a>
 
 ```typescript
@@ -62,28 +64,51 @@ public getKeyName(keyName?: string)
 
 ---
 
+#### Static Functions <a name="Static Functions"></a>
+
+##### `createKeyPolicy` <a name="kms-encryption-key.KmsEncryptionKey.createKeyPolicy"></a>
+
+```typescript
+import { KmsEncryptionKey } from 'kms-encryption-key'
+
+KmsEncryptionKey.createKeyPolicy(administratorRoleArns: string[])
+```
+
+###### `administratorRoleArns`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.parameter.administratorRoleArns"></a>
+
+- *Type:* `string`[]
+
+---
+
+##### `getAdministratorArns` <a name="kms-encryption-key.KmsEncryptionKey.getAdministratorArns"></a>
+
+```typescript
+import { KmsEncryptionKey } from 'kms-encryption-key'
+
+KmsEncryptionKey.getAdministratorArns(administratorRoleArns: string[])
+```
+
+###### `administratorRoleArns`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.parameter.administratorRoleArns"></a>
+
+- *Type:* `string`[]
+
+---
+
+##### `getArnPrincipals` <a name="kms-encryption-key.KmsEncryptionKey.getArnPrincipals"></a>
+
+```typescript
+import { KmsEncryptionKey } from 'kms-encryption-key'
+
+KmsEncryptionKey.getArnPrincipals(administratorRoleArns: string[])
+```
+
+###### `administratorRoleArns`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.parameter.administratorRoleArns"></a>
+
+- *Type:* `string`[]
+
+---
 
 #### Properties <a name="Properties"></a>
-
-##### `description`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.property.description"></a>
-
-```typescript
-public readonly description: string;
-```
-
-- *Type:* `string`
-
----
-
-##### `environmentName`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.property.environmentName"></a>
-
-```typescript
-public readonly environmentName: string;
-```
-
-- *Type:* `string`
-
----
 
 ##### `keyName`<sup>Required</sup> <a name="kms-encryption-key.KmsEncryptionKey.property.keyName"></a>
 
@@ -105,6 +130,26 @@ public readonly kmsKey: IKey;
 
 ---
 
+##### `description`<sup>Optional</sup> <a name="kms-encryption-key.KmsEncryptionKey.property.description"></a>
+
+```typescript
+public readonly description: string;
+```
+
+- *Type:* `string`
+
+---
+
+##### `environmentName`<sup>Optional</sup> <a name="kms-encryption-key.KmsEncryptionKey.property.environmentName"></a>
+
+```typescript
+public readonly environmentName: string;
+```
+
+- *Type:* `string`
+
+---
+
 
 
 
@@ -112,7 +157,7 @@ public readonly kmsKey: IKey;
 
 ### IKmsEncryptionKeyProps <a name="kms-encryption-key.IKmsEncryptionKeyProps"></a>
 
-- *Implemented By:* [`kms-encryption-key.IKmsEncryptionKeyProps`](#kms-encryption-key.IKmsEncryptionKeyProps)
+- *Implemented By:* [`kms-encryption-key.KmsEncryptionKey`](#kms-encryption-key.KmsEncryptionKey), [`kms-encryption-key.IKmsEncryptionKeyProps`](#kms-encryption-key.IKmsEncryptionKeyProps)
 
 
 #### Properties <a name="Properties"></a>

@@ -14,32 +14,41 @@ export interface IKmsEncryptionKeyProps {
   readonly description?: string;
 }
 
-const getArnPrincipals = (administratorRoleArns: string[]): ArnPrincipal[] => {
-  return administratorRoleArns.map((arn) => new ArnPrincipal(arn));
-};
+export class KmsEncryptionKey
+  extends Construct
+  implements IKmsEncryptionKeyProps {
+  static getArnPrincipals(administratorRoleArns: string[]): ArnPrincipal[] {
+    return administratorRoleArns.map((arn) => new ArnPrincipal(arn));
+  }
 
-const getAdministratorArns = (
-  administratorRoleArns: string[],
-): CompositePrincipal[] => {
-  return [new CompositePrincipal(...getArnPrincipals(administratorRoleArns))];
-};
+  static getAdministratorArns(
+    administratorRoleArns: string[],
+  ): CompositePrincipal[] {
+    return [
+      new CompositePrincipal(
+        ...KmsEncryptionKey.getArnPrincipals(administratorRoleArns),
+      ),
+    ];
+  }
 
-const createKeyPolicy = (administratorRoleArns: string[]): PolicyDocument => {
-  return new PolicyDocument({
-    statements: [
-      new PolicyStatement({
-        actions: ['kms:*'],
-        resources: ['*'],
-        principals: getAdministratorArns(administratorRoleArns),
-      }),
-    ],
-  });
-};
-export class KmsEncryptionKey extends Construct {
-  kmsKey: IKey;
-  description: string;
-  keyName: string;
-  environmentName: string;
+  static createKeyPolicy(administratorRoleArns: string[]): PolicyDocument {
+    return new PolicyDocument({
+      statements: [
+        new PolicyStatement({
+          actions: ['kms:*'],
+          resources: ['*'],
+          principals: KmsEncryptionKey.getAdministratorArns(
+            administratorRoleArns,
+          ),
+        }),
+      ],
+    });
+  }
+
+  readonly kmsKey: IKey;
+  readonly description?: string;
+  readonly keyName: string;
+  readonly environmentName?: string;
 
   constructor(scope: Construct, id: string, props?: IKmsEncryptionKeyProps) {
     super(scope, id);
@@ -59,12 +68,12 @@ export class KmsEncryptionKey extends Construct {
       alias: this.keyName,
       description: this.description,
       removalPolicy: RemovalPolicy.RETAIN,
-      policy: createKeyPolicy(administratorRoleArns),
+      policy: KmsEncryptionKey.createKeyPolicy(administratorRoleArns),
     });
   }
 
   addTags() {
-    Tags.of(this).add('environment', this.environmentName);
+    Tags.of(this).add('environment', this.environmentName as string);
     Tags.of(this).add('alias', this.keyName);
   }
 }

@@ -3,9 +3,6 @@ const { DependabotScheduleInterval } = require('projen/lib/github');
 const projectName = () => {
   return 'kms-encryption-key';
 };
-const moduleName = () => {
-  return projectName().replace(/-/gi, '_');
-};
 
 const project = new AwsCdkConstructLibrary({
   author: 'jakeitegsy',
@@ -33,25 +30,13 @@ const project = new AwsCdkConstructLibrary({
   releaseToGitHub: true,
   publishToPypi: {
     distName: projectName(),
-    module: moduleName(),
+    module: projectName().replace(/-/gi, '_'),
   },
-  // publishToGo: {
-  //   module: moduleName(),
-  // },
-  // publishToNuget: {
-  //   dotNamespace: 'JadeCobra.KmsEncryptionKey',
-  //   packageId: 'Kms.Encryption.Key',
-  // },
   catalog: {
     announce: true,
     twitter: '@jakeitegsy',
   },
   description:
-    'CDK Construct to create KMS Key for Encryption and defined Administrators in a Key Policy' /* The description is just a string that helps people understand the purpose of the package. */,
-  // cdkTestDependencies: undefined,  /* AWS CDK modules required for testing. */
-  // deps: [],                        /* Runtime dependencies of this module. */
-  // devDeps: [],                     /* Build dependencies for this module. */
-  // packageName: undefined,          /* The "name" in package.json. */
-  // release: undefined,              /* Add release management to this project. */
+    'CDK Construct to create KMS Key with defined Administrator Role Arns',
 });
 project.synth();
